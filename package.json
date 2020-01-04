@@ -1,0 +1,19 @@
+{
+  "name": "schedule-builder",
+  "version": "1.0.0",
+  "description": "Build schedule based on selected courses",
+  "scripts": {
+    "dev": "parcel src/index.html",
+    "build": "parcel build src/index.html"
+  },
+  "keywords": [
+    "schedule",
+    "builder",
+    "university"
+  ],
+  "author": "rblinde",
+  "license": "MIT",
+  "devDependencies": {
+    "parcel-bundler": "^1.12.4"
+  }
+}
