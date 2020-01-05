@@ -66,5 +66,33 @@ function handleBuildBtnClick() {
   FileSaver.saveAs(blob, `calendar.ics`);
 }
 
+/**
+ * Selects all checkboxes in section
+ */
+function handleSelectAllBtnClick(e) {
+  const goal = e.target.parentNode.parentNode.parentNode.nextElementSibling;
+  const checkboxes = [...goal.querySelectorAll('input[name="courses"]')];
+
+  for (const checkbox of checkboxes) {
+    checkbox.checked = true;
+  }
+}
+
+/**
+ * Unselects all checkboxes in section
+ */
+function handleUnselectAllBtnClick(e) {
+  const goal = e.target.parentNode.parentNode.parentNode.nextElementSibling;
+  const checkboxes = [...goal.querySelectorAll('input[name="courses"]')];
+
+  for (const checkbox of checkboxes) {
+    checkbox.checked = false;
+  }
+}
+
 const buildBtn = document.getElementById('build-btn');
+const selectAllBtns = document.querySelectorAll('.js-select-all');
+const unselectAllBtns = document.querySelectorAll('.js-unselect-all');
 buildBtn.addEventListener('click', handleBuildBtnClick);
+selectAllBtns.forEach(btn => btn.addEventListener('click', handleSelectAllBtnClick));
+unselectAllBtns.forEach(btn => btn.addEventListener('click', handleUnselectAllBtnClick));
