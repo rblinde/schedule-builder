@@ -2,7 +2,7 @@
 > Simple JavaScript application to create customized schedule for University.
 
 ## Demo
-A working demo will eventually be linked here.
+A working application can be found [here](https://schedule-builder.netlify.com/).
 
 ## Installation
 
