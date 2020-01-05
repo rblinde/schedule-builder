@@ -15,5 +15,8 @@
   "license": "MIT",
   "devDependencies": {
     "parcel-bundler": "^1.12.4"
+  },
+  "dependencies": {
+    "file-saver": "^2.0.2"
   }
 }
