@@ -32,7 +32,8 @@ function formatDate(date, time) {
  * @return {String}            ICS string
  */
 function createSchedule(events) {
-  const header = 'BEGIN:VCALENDAR\nVERSION:2.0\nMETHOD:PUBLISH\nPRODID:-//rblinde/schedule-builder v1.0//EN';
+  const header = 'BEGIN:VCALENDAR\nVERSION:2.0\nMETHOD:PUBLISH\nPRODID:-//rblinde/schedule-builder v1.0//EN' +
+  '\nCALSCALE:GREGORIAN\nX-WR-CALNAME:schedule-builder\nX-WR-TIMEZONE:Europe/Amsterdam';
   const footer = '\nEND:VCALENDAR';
 
   let body = '';
@@ -76,7 +77,7 @@ function handleBuildBtnClick() {
   const events = data.filter(row => selectedCourseIds.includes(row.course));
   const schedule = createSchedule(events);
   // Downloading
-  const blob = new Blob([schedule], { type: 'text/calendar;charset=utf-8' });
+  const blob = new Blob([schedule], { type: 'text/calendar' });
   FileSaver.saveAs(blob, `calendar.ics`);
 }
 
