@@ -3,6 +3,17 @@
 const FileSaver = require('file-saver');
 const data = require('./data.json');
 
+
+/**
+ * Creates timestamp of current datetime
+ * @return {String} timestamp in ICS format
+ */
+function createTimestamp() {
+  const d = new Date();
+  const string = d.toISOString().replace(/-|:|\./g, '');
+  return string.substr(0, 15) + 'Z';
+}
+
 /**
  * Creates datetime string
  * @param  {String} date date from csv
@@ -30,12 +41,15 @@ function createSchedule(events) {
     const { start, end, date, course, label, location } = event;
     const eventStart = formatDate(date, start);
     const eventEnd = formatDate(date, end);
+    const timeStamp = createTimestamp();
     const eventString = '\nBEGIN:VEVENT' +
     `\nUID:${eventEnd}-${course}@rblinde/schedule-builder` +
     `\nSUMMARY:${label}` +
-    `\nDTSTART;TZID=Europe/Amsterdam:${eventStart}` +
-    `\nDTEND;TZID=Europe/Amsterdam:${eventEnd}` +
+    `\nDTSTART:${eventStart}` +
+    `\nDTEND:${eventEnd}` +
+    `\nDTSTAMP:${timeStamp}` +
     `\nLOCATION:${location}` +
+    '\nSTATUS:CONFIRMED' +
     '\nSEQUENCE:0' +
     '\nEND:VEVENT';
 
@@ -62,7 +76,7 @@ function handleBuildBtnClick() {
   const events = data.filter(row => selectedCourseIds.includes(row.course));
   const schedule = createSchedule(events);
   // Downloading
-  const blob = new Blob([schedule], { type: 'text/plain;charset=utf-8' });
+  const blob = new Blob([schedule], { type: 'text/calendar;charset=utf-8' });
   FileSaver.saveAs(blob, `calendar.ics`);
 }
 
