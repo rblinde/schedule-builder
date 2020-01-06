@@ -77,7 +77,7 @@ function handleBuildBtnClick() {
   const events = data.filter(row => selectedCourseIds.includes(row.course));
   const schedule = createSchedule(events);
   // Downloading
-  const blob = new Blob([schedule], { type: 'text/calendar' });
+  const blob = new Blob(['\ufeff', schedule], { type: 'text/calendar' });
   FileSaver.saveAs(blob, `calendar.ics`);
 }
 
