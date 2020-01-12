@@ -3,7 +3,6 @@
 const FileSaver = require('file-saver');
 const data = require('./data.json');
 
-
 /**
  * Creates timestamp of current datetime
  * @return {String} timestamp in ICS format
@@ -81,32 +80,19 @@ function handleBuildBtnClick() {
 }
 
 /**
- * Selects all checkboxes in section
+ * Toggle all checkboxes
  */
-function handleSelectAllBtnClick(e) {
-  const goal = e.target.parentNode.parentNode.parentNode.nextElementSibling;
-  const checkboxes = [...goal.querySelectorAll('input[name="courses"]')];
+function toggleAllCheckboxes(checked = true) {
+  const checkboxes = document.querySelectorAll('input[name="courses"]');
 
   for (const checkbox of checkboxes) {
-    checkbox.checked = true;
-  }
-}
-
-/**
- * Unselects all checkboxes in section
- */
-function handleUnselectAllBtnClick(e) {
-  const goal = e.target.parentNode.parentNode.parentNode.nextElementSibling;
-  const checkboxes = [...goal.querySelectorAll('input[name="courses"]')];
-
-  for (const checkbox of checkboxes) {
-    checkbox.checked = false;
+    checkbox.checked = checked;
   }
 }
 
 const buildBtn = document.getElementById('build-btn');
-const selectAllBtns = document.querySelectorAll('.js-select-all');
-const unselectAllBtns = document.querySelectorAll('.js-unselect-all');
+const selectAllBtn = document.querySelector('.js-select-all');
+const unselectAllBtn = document.querySelector('.js-unselect-all');
 buildBtn.addEventListener('click', handleBuildBtnClick);
-selectAllBtns.forEach(btn => btn.addEventListener('click', handleSelectAllBtnClick));
-unselectAllBtns.forEach(btn => btn.addEventListener('click', handleUnselectAllBtnClick));
+selectAllBtn.addEventListener('click', () => toggleAllCheckboxes());
+unselectAllBtn.addEventListener('click', () => toggleAllCheckboxes(false));
