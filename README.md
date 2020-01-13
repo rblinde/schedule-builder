@@ -1,3 +1,5 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/1b62c7a6-d2dc-491e-b6a4-1e24d7aa4af4/deploy-status)](https://app.netlify.com/sites/schedule-builder/deploys)
+
 # Schedule builder
 > Simple JavaScript application to create customized schedule for University.
 
