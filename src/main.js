@@ -31,8 +31,33 @@ function formatDate(date, time) {
  * @return {String}            ICS string
  */
 function createSchedule(events) {
-  const header = 'BEGIN:VCALENDAR\nVERSION:2.0\nMETHOD:PUBLISH\nPRODID:-//rblinde/schedule-builder v1.0//EN';
+  const header = 'BEGIN:VCALENDAR' +
+  '\nPRODID:-//rblinde/schedule-builder v1.0//EN' +
+  '\nVERSION:2.0' +
+  '\nCALSCALE:GREGORIAN' +
+  '\nMETHOD:PUBLISH' +
+  '\nX-WR-CALNAME:ScheduleBuilder' +
+  '\nX-WR-TIMEZONE:Europe/Amsterdam';
+
   const footer = '\nEND:VCALENDAR';
+  const timezone = '\nBEGIN:VTIMEZONE' + 
+  '\nTZID:Europe/Amsterdam' +
+  '\nX-LIC-LOCATION:Europe/Amsterdam' +
+  '\nBEGIN:DAYLIGHT' +
+  '\nTZOFFSETFROM:+0100' +
+  '\nTZOFFSETTO:+0200' +
+  '\nTZNAME:CEST' +
+  '\nDTSTART:19700329T020000' +
+  '\nRRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=-1SU' +
+  '\nEND:DAYLIGHT' +
+  '\nBEGIN:STANDARD' +
+  '\nTZOFFSETFROM:+0200' +
+  '\nTZOFFSETTO:+0100' +
+  '\nTZNAME:CET' +
+  '\nDTSTART:19701025T030000' +
+  '\nRRULE:FREQ=YEARLY;BYMONTH=10;BYDAY=-1SU' +
+  '\nEND:STANDARD' +
+  '\nEND:VTIMEZONE';
 
   let body = '';
 
@@ -55,7 +80,7 @@ function createSchedule(events) {
     body += eventString;
   }
 
-  return header + body + footer;
+  return header + timezone + body + footer;
 }
 
 /**
