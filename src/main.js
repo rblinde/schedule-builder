@@ -20,7 +20,7 @@ function createTimestamp() {
  * @return {String}      date string (DMYTHm00)
  */
 function formatDate(date, time) {
-  const [day, month, year] = date.split('/');
+  const [day, month, year] = date.split('-');
   const [hour, minute] = time.split(':');
   return `${year}${month}${day}T${hour}${minute}00`;
 }
